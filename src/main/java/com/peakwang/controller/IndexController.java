@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 public class IndexController {
-	private final Logger logger = Logger.getLogger(IndexController.class);
+//	private final Logger logger = Logger.getLogger(IndexController.class);
 	public static final String BASE_PATH = ContextLoader
 			.getCurrentWebApplicationContext().getServletContext()
 			.getRealPath("/");

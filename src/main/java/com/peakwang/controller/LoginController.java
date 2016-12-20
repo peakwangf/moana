@@ -16,7 +16,7 @@ import com.peakwang.model.User;
  */
 @Controller
 public class LoginController {
-	private final Logger logger = Logger.getLogger(LoginController.class);
+	//private final Logger logger = Logger.getLogger(LoginController.class);
 	public static final String BASE_PATH = ContextLoader
 			.getCurrentWebApplicationContext().getServletContext()
 			.getRealPath("/");

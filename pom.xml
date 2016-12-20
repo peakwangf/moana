@@ -10,7 +10,7 @@
 	<properties>
 		<moana_version>1.0.0</moana_version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jpa.version>1.10.5.RELEASE</jpa.version>
+		<java.version>1.8</java.version>
 		<mariadb.connector.version>1.4.6</mariadb.connector.version>
 	</properties>
 
@@ -201,13 +201,32 @@
 			</resource>
 		</resources>
 		<plugins>
+		<plugin>
+				<groupId>org.datanucleus</groupId>
+				<artifactId>datanucleus-maven-plugin</artifactId>
+				<version>5.0.0-release</version>
+				<configuration>
+					<api>JDO</api>
+					<persistenceUnitName>Tutorial</persistenceUnitName>
+					<log4jConfiguration>src/main/resources/log4j.properties</log4jConfiguration>
+					<verbose>false</verbose>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>enhance</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.1</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
