@@ -2,9 +2,91 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>登陆</title>
+<!-- Bootstrap Core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom CSS -->
+<link href="css/sb-admin.css" rel="stylesheet">
+<!-- Morris Charts CSS -->
+<link href="css/plugins/morris.css" rel="stylesheet">
+<!-- font-awesome字体库 -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 <body>
-test
+	<div class="container">
+		<div id="loginbox" style="margin-top: 50px;"
+			class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<div class="panel-title">
+						<img class="img-fluid img-rounded" alt="logo "
+							src="images/logo.jpg " style="max-width: 30px;"> 登录
+					</div>
+				</div>
+
+				<div style="padding-top: 30px" class="panel-body ">
+
+					<div style="display: none" id="login-alert "
+						class="alert alert-danger col-sm-12 "></div>
+
+					<form id="loginform" class="form-horizontal" role="form"
+						action="doLogin" method="post">
+						<div class="form-group ">
+							<div style="margin-bottom: 25px" class="input-group">
+								<span class="input-group-addon"><i class="fa fa-user "></i></span>
+								<input id="login-account" type="text" class="form-control "
+									name="account " placeholder="请输入您的账户 " data-bv-notempty
+									data-bv-notempty-message="您的账户不能为空 ">
+							</div>
+						</div>
+						<div class="form-group ">
+							<div style="margin-bottom: 25px" class="input-group ">
+								<span class="input-group-addon"><i class="fa fa-lock "></i></span>
+								<input id="login-password " type="password"
+									class="form-control " name="password" placeholder="请输入您的密码 "
+									data-bv-notempty data-bv-notempty-message="您的密码不能为空 ">
+							</div>
+						</div>
+						<div style="margin-top: 10px" class="form-group ">
+							<!-- Button -->
+							<div class="col-sm-12 controls ">
+								<button type="submit" class="btn btn-success col-sm-4 ">登录</button>
+								<button type="submit" class="btn btn-success col-sm-4 ">注册</button>
+							</div>
+						</div>
+						<!-- <p class="info form-group alert alert-danger "></p> -->
+						#if($!loginInfo)
+						<p class="loginInfo form-group alert alert-danger ">$!loginInfo</p>
+						#end
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
+<!-- Js库 -->
+<script src="js/jquery.js "></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js "></script>
+<link href="css/plugins/bootstrapValidator.min.css " rel="stylesheet ">
+<script src="js/plugins/bootstrapValidator/bootstrapValidator.min.js "></script>
+<script type="text/javascript ">
+	jQuery.noConflict();
+	(function($) {
+		$(function() {
+			$("#submit-btn ").on(
+					"click ",
+					function() {
+						$("#loginform ").bootstrapValidator();
+						var isValid = $('#loginform')
+								.data('bootstrapValidator').isValid();
+						//console.log(isValid);
+						if (isValid) {
+							$("#loginform ").submit();
+						}
+					});
+		})
+	})(jQuery)
+</script>
 </html>
