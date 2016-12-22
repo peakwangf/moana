@@ -10,42 +10,37 @@
 	<properties>
 		<moana_version>1.0.0</moana_version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jpa.version>1.10.5.RELEASE</jpa.version>
+		
 		<mariadb.connector.version>1.4.6</mariadb.connector.version>
 	</properties>
 
 	<dependencies>
-	<dependency>
-            <groupId>org.datanucleus</groupId>
-            <artifactId>datanucleus-core</artifactId>
-            <version>[5.0.0-m1, 5.9)</version>
-        </dependency>
-        <dependency>
-            <groupId>org.datanucleus</groupId>
-            <artifactId>datanucleus-api-jdo</artifactId>
-            <version>[5.0.0-m1, 5.9)</version>
-        </dependency>
-        <dependency>
-            <groupId>org.datanucleus</groupId>
-            <artifactId>javax.jdo</artifactId>
-            <version>[3.2.0-m5, )</version>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>[1.2, 1.3)</version>
-        </dependency>
-          <!-- ENABLE THIS FOR MYSQL -->
-        <dependency>
-            <groupId>org.datanucleus</groupId>
-            <artifactId>datanucleus-rdbms</artifactId>
-            <version>[5.0.0-m1, 5.9)</version>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.17</version>
-        </dependency>
+		<dependency>
+			<groupId>org.datanucleus</groupId>
+			<artifactId>datanucleus-core</artifactId>
+			<version>[5.0.0-m1, 5.9)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.datanucleus</groupId>
+			<artifactId>datanucleus-api-jdo</artifactId>
+			<version>[5.0.0-m1, 5.9)</version>
+		</dependency>
+		<dependency>
+			<groupId>org.datanucleus</groupId>
+			<artifactId>javax.jdo</artifactId>
+			<version>[3.2.0-m5, )</version>
+		</dependency>
+		<!-- ENABLE THIS FOR MYSQL -->
+		<dependency>
+			<groupId>org.datanucleus</groupId>
+			<artifactId>datanucleus-rdbms</artifactId>
+			<version>[5.0.0-m1, 5.9)</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.17</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -78,12 +73,12 @@
 			<version>4.0.5.RELEASE</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-context-support</artifactId>
-		    <version>4.3.3.RELEASE</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>4.3.3.RELEASE</version>
 		</dependency>
-		
-				
+
+
 		<!-- 数据库配置 -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
@@ -91,7 +86,7 @@
 			<version>1.4</version>
 		</dependency>
 		<!-- end 数据库 -->
-		
+
 		<dependency>
 			<groupId>org.apache.velocity</groupId>
 			<artifactId>velocity</artifactId>
@@ -225,32 +220,40 @@
 			</resource>
 		</resources>
 		<plugins>
-		 <plugin>
-                <groupId>org.datanucleus</groupId>
-                <artifactId>datanucleus-maven-plugin</artifactId>
-                <version>5.0.0-release</version>
-                <configuration>
-                    <api>JDO</api>
-                    <persistenceUnitName>Tutorial</persistenceUnitName>
-                    <log4jConfiguration>src/main/resources/log4j.properties</log4jConfiguration>
-                    <verbose>false</verbose>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>enhance</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+			<plugin>
+				<groupId>org.datanucleus</groupId>
+				<artifactId>datanucleus-maven-plugin</artifactId>
+				<version>5.0.0-release</version>
+				<configuration>
+					<api>JDO</api>
+					<persistenceUnitName>Tutorial</persistenceUnitName>
+					<log4jConfiguration>src/main/resources/log4j.properties</log4jConfiguration>
+					<verbose>false</verbose>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>enhance</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.1</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
