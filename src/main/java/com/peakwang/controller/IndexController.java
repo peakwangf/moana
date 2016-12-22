@@ -1,11 +1,11 @@
 package com.peakwang.controller;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.ContextLoader;
-import javax.servlet.http.HttpSession;
+//import javax.servlet.http.HttpSession;
 
 /**
  * 控制器Controller
