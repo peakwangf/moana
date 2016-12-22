@@ -15,6 +15,7 @@
 					+ request.getServerPort()) + path;
 	request.setAttribute("_basepath", basePath);
 %>
+
 <script type="text/javascript">
 	var _basepath = "${_basepath}";
 </script>
@@ -23,6 +24,7 @@
 </script>
 </head>
 <body>
+ttggh
 </body>
 </html>
 

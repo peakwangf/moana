@@ -1,20 +1,11 @@
-/**
- * 
- */
 package com.peakwang.model;
 
 import javax.jdo.annotations.*;
 
-/**
- * @author peakwang
- *
- */
-
-@PersistenceCapable(table = "user")
-public class User{
-	/**
-	 * 
-	 */
+@PersistenceCapable(table="user")
+public class User {
+	
+	
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
 	private int id;
@@ -61,11 +52,4 @@ public class User{
     public void setEmail(String email) {
         this.email = email;
     }
-
-	@Override
-	public String toString(){
-		return "";
-	}
-	
-
 }
