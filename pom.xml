@@ -8,13 +8,23 @@
 	<name>moana</name>
 	<url>http://maven.apache.org</url>
 	<properties>
-		<moana_version>1.0.0</moana_version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		
-		<mariadb.connector.version>1.4.6</mariadb.connector.version>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+				<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.1.2</version>
+			</dependency>
+			
 		<dependency>
 			<groupId>org.datanucleus</groupId>
 			<artifactId>datanucleus-core</artifactId>
@@ -39,7 +49,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.17</version>
+			<version>5.1.18</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -79,13 +89,7 @@
 		</dependency>
 
 
-		<!-- 数据库配置 -->
-		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-			<version>1.4</version>
-		</dependency>
-		<!-- end 数据库 -->
+		
 
 		<dependency>
 			<groupId>org.apache.velocity</groupId>
@@ -204,6 +208,8 @@
 			<version>1.4.7</version>
 		</dependency>
 	</dependencies>
+	
+	
 	<build>
 		<finalName>moana</finalName>
 		<sourceDirectory>src/main/java</sourceDirectory>
@@ -239,6 +245,7 @@
 					</execution>
 				</executions>
 			</plugin>
+			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -247,28 +254,6 @@
 					<source>1.8</source>
 					<target>1.8</target>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.6</version>
-				<configuration>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.1</version>
-				<configuration>
-					
-					<systemProperties>
-						<systemProperty>
-							<key>log4j.configuration</key>
-							<value>file:src/main/resources/log4j.properties</value>
-						</systemProperty>
-					</systemProperties>
 				</configuration>
 			</plugin>
 		</plugins>
