@@ -5,17 +5,25 @@ import javax.jdo.annotations.*;
 @PersistenceCapable(table="user")
 public class User {
 	
-	
+	/**
+     * 用户ID
+     */
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
-	private int id;
-	
+	private int userid;
+	/**
+     * 用户名
+     */
 	@Column(length=20)
 	private String username;
-	
+	/**
+     * 密码
+     */
 	@Column(length=20)
 	private String password;
-	
+	/**
+     * 用户邮箱
+     */
 	@Column(length=30)
 	private String email;
 	public User() {
@@ -23,11 +31,11 @@ public class User {
 	}
 	
 	public int getId() {
-	    return id;
+	    return userid;
 	}
 
 	public void setId(int id) {
-	    this.id = id;
+	    this.userid = id;
 	}
     public String getUsername() {
         return username;

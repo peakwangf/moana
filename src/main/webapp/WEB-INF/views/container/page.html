@@ -1,0 +1,49 @@
+#if($page)
+<div>
+	<div class="col-sm-5">
+		<ul class="col-sm-5" id="page" curpage=$page.start
+			pageCount=$page.pagesize totalpage=$page.totalpage>
+		</ul>
+	</div>
+	<div class="col-sm-5 pagination">
+	       页码 $!page.start/$!page.totalpage 记录数 $!page.total
+	</div>
+</div>
+#end
+<script src="js/plugins/paginator/bootstrap-paginator.js"></script>
+<script src="js/plugins/paginator/qunit-1.11.0.js"></script>
+
+<script type="text/javascript">
+jQuery.noConflict();
+(function($) {
+	 $(function(){
+			$.setPage=function(url){
+			var page=$("#page");
+			var options = {
+					bootstrapMajorVersion:3,
+					containerClass:"pagination",
+		            currentPage:page.attr('curpage'),
+					totalPages:page.attr('totalpage'),
+					numberOfPages:1,
+					itemTexts: function (type, page, current) {
+			              switch (type) {
+			                case "first":
+			                  return "首页";
+			                case "prev":
+			                  return "上一页";
+			                case "next":
+			                  return "下一页";
+			                case "last":
+			                  return "末页";
+			                case "page":
+			                  return page;
+			              }},
+					pageUrl: function(type, page, current){
+					  return url+"start="+page;
+			        }
+			 }
+			  $('#page').bootstrapPaginator(options);
+			}
+		});
+	})(jQuery)
+</script>
