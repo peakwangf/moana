@@ -10,7 +10,7 @@ public class User {
      */
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
-	private int userid;
+	private int uid;
 	/**
      * 用户名
      */
@@ -30,12 +30,12 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public int getId() {
-	    return userid;
+	public int getUid() {
+	    return uid;
 	}
 
-	public void setId(int id) {
-	    this.userid = id;
+	public void setUid(int id) {
+	    this.uid = id;
 	}
     public String getUsername() {
         return username;

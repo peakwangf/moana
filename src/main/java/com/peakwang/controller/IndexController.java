@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.ContextLoader;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.ModelMap;
-
 
 import com.peakwang.service.IndexService;
 import com.peakwang.model.MovieTicket;
@@ -22,7 +22,6 @@ import com.peakwang.model.MovieTicket;
  */
 @Controller
 public class IndexController {
-	
 	@Autowired
 	private IndexService indexService;
 	
@@ -33,19 +32,16 @@ public class IndexController {
 	 /**
      * 首页
      */
-    @RequestMapping({"/index"})
-    public String index() {
-        return "index";
-    }
+  
 	
 	/**
      * 获取电影票列表
      * @return 电影票列表
      */
     @RequestMapping("list")
-    @ResponseBody
-    public List<MovieTicket> list() {
+    public String list(ModelMap model) {
         List<MovieTicket> movieTicket = indexService.getAllMovieTicket();
-        return movieTicket;
+        model.addAttribute("list", movieTicket);
+        return "index";
     }
 }

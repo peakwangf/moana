@@ -20,7 +20,7 @@
 	var _basepath = "${_basepath}";
 </script>
 <script type="text/javascript">
-	window.location.href = "${_basepath}/login";
+	window.location.href = "${_basepath}/test";
 </script>
 </head>
 <body>

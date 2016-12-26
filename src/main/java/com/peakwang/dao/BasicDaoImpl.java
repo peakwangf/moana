@@ -18,15 +18,16 @@ import com.peakwang.dao.BasicDao;
 @Repository
 public class BasicDaoImpl implements BasicDao{
 	
+   
 	@Autowired
     private PersistenceManagerFactory persistenceManagerFactory;
 	
 	@Override
 	public <T> List<T> selectByQuery(Class<T> classtype,String params){
 		 PersistenceManager pm = persistenceManagerFactory.getPersistenceManager();
-	        List<T> list = null;
-	        Query q = pm.newQuery(classtype, params);
-	        list = (List<T>) q.execute();
-	        return list;
+	     List<T> list = null;
+	     Query q = pm.newQuery(classtype, params);
+		 list = (List<T>) q.execute();
+	     return list;
 	}
 }

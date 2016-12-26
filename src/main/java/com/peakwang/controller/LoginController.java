@@ -28,7 +28,6 @@ public class LoginController {
 	
 	@Autowired
 	private LoginService loginService;
-	//private IndexService indexService;
 	
 	public static final String BASE_PATH = ContextLoader.getCurrentWebApplicationContext().getServletContext()
 			.getRealPath("/");
@@ -41,7 +40,10 @@ public class LoginController {
 		else
 			return "login";
 	}
-
+	@RequestMapping(value = "/test")
+	public String test(ModelMap model, HttpSession session) {
+			return "test2";
+	}
 	@RequestMapping(value = "/doLogin", method = RequestMethod.POST)
 	public String doLogin(ModelMap model, HttpSession session, String username, String password) {
 		String params=null;
@@ -56,7 +58,7 @@ public class LoginController {
 		if (users.size() > 0) {
 			if (password.equals(users.get(0).getPassword())) {
 				session.setAttribute("user", users.get(0));
-				return "redirect:/index";
+				return "test";
 			} else {
 				model.addAttribute("loginInfo", "对不起，您输入的密码错误。");
 			}

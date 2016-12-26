@@ -15,10 +15,9 @@
 
 
 <!-- Bootstrap Core JavaScript -->
- <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="http://cdn.bootcss.com/vue/2.1.4/vue.min.js"></script>
- <script src="http://cdn.bootcss.com/lodash.js/4.17.2/lodash.min.js"></script>
+
 </head>
 
 <body>
@@ -46,18 +45,16 @@
 							<th>剩余票数</th>
 							<th>操作</th>
 						</tr>
-						 </thead>
-						 <tbody id="movieTable">
-						<tr v-for="item in sortmovies">
-							<td v-text="item.id"></td>
-							<td v-text="item.name"></td>
-							<td v-text="item.num"></td>
+						 #set( $num = 1) #foreach($item in $list)			
+						 <tr>
+							<td>$item.Tid</td>
+							<td>$item.movieName</td>
+							<td>$item.ticketNum</td>
 							<td>
 								<button class="btn btn-primary btn-sm" tag="del">抢票</button>
 							</td>
 						</tr>
-						</tbody>
-						
+						#set( $num = $num+1) #end
 					</table>
 				</div>
 			</div>
@@ -85,7 +82,7 @@
 		</div>
 	</div>
 </body>
-<script>
+<!--  <script>
 	$(document).ready(function () {
 	$.ajax({
             url:"/list",
@@ -127,9 +124,9 @@
             }
         });
 	});
-</script>
+</script>-->
 
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 	$(function() {
 		
 		var basePath = $('base').attr('href');
@@ -140,6 +137,7 @@
 			//$('#url').val(basePath + "enterprise/delete?id=" + id); //ֵ
 			$('#delmessage').text("是否确定抢购");
 			$('#delcfmModel').modal();
+			
 		});
 		$("button[tag='edit']").on("click", function() {
 			var id = $(this).attr("url");
@@ -154,6 +152,6 @@
 			window.location.href = url;
 		});
 	});
-</script>  -->
+</script>
 </html>
 

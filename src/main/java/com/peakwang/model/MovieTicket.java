@@ -10,7 +10,7 @@ public class MovieTicket {
      */
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-    private int tId;
+    private int tid;
     /**
      * 电影名称
      */
@@ -20,12 +20,15 @@ public class MovieTicket {
      */
     private int ticketNum;
     
-    public int getTId() {
-        return tId;
+    public MovieTicket(){
+    	
+    }
+    public int getTid() {
+        return tid;
     }
 
-    public void setTId(int tId) {
-        this.tId = tId;
+    public void setTid(int id) {
+        this.tid = id;
     }
 
     public String getMovieName() {
