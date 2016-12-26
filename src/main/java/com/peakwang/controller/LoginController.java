@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpSession;
 import org.springframework.web.context.ContextLoader;
 
+import com.peakwang.model.MovieTicket;
 import com.peakwang.model.User;
 import com.peakwang.service.LoginService;
+import com.peakwang.service.IndexService;
 
 /**
  * 控制器Controller
@@ -26,6 +28,7 @@ public class LoginController {
 	
 	@Autowired
 	private LoginService loginService;
+	//private IndexService indexService;
 	
 	public static final String BASE_PATH = ContextLoader.getCurrentWebApplicationContext().getServletContext()
 			.getRealPath("/");
@@ -42,7 +45,7 @@ public class LoginController {
 	@RequestMapping(value = "/doLogin", method = RequestMethod.POST)
 	public String doLogin(ModelMap model, HttpSession session, String username, String password) {
 		String params=null;
-		if (username != null && username.length() > 0) {
+		if (username != null && username.length() > 0) { 
 			params=username;
 		}
 		if (password != null && password.length() > 0) {

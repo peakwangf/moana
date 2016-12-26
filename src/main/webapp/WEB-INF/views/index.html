@@ -11,103 +11,149 @@
 
 <!-- Morris Charts CSS -->
 <link href="css/plugins/morris.css" rel="stylesheet">
-<script src="js/jquery.js"></script>
+
+
+
 <!-- Bootstrap Core JavaScript -->
+ <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="http://cdn.bootcss.com/vue/2.1.4/vue.min.js"></script>
+ <script src="http://cdn.bootcss.com/lodash.js/4.17.2/lodash.min.js"></script>
 </head>
 
 <body>
-	<div id="wrapper">
-		<!-- Navigation -->
-		<div id="page-wrapper">
-			<div class="container-fluid">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">电影查询</h3>
-					</div>
-					<div class="panel-body">
-						<form action="" method="get" class="navbar-form navbar-left"
-							role="search">
-							<div class="form-group">
-								<input id="search" type="text" class="form-control"
-									value="searchbody" name="searchbody" placeholder="Search">
-							</div>
-							<button type="submit" class="btn btn-default">查询</button>
-						</form>
-					</div>
-				</div>
-				<div class="panel panel-default">
 
-					<div class="panel-body">
+	<!-- Navigation -->
+	<div id="page-wrapper">
+		<div class="container-fluid">
 
+			<div class="panel panel-default">
 
-
+				<div class="panel-body">
+					
 						<div class="row alert alert-success " aria-label="Close"
 							role="alert">
 							<h3 class="panel-title">电影列表</h3>
 						</div>
+						
+				
+					<div class="row"></div>
+					<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>电影名称</th>
+							<th>剩余票数</th>
+							<th>操作</th>
+						</tr>
+						 </thead>
+						 <tbody id="movieTable">
+						<tr v-for="item in sortmovies">
+							<td v-text="item.id"></td>
+							<td v-text="item.name"></td>
+							<td v-text="item.num"></td>
+							<td>
+								<button class="btn btn-primary btn-sm" tag="del">抢票</button>
+							</td>
+						</tr>
+						</tbody>
+						
+					</table>
+				</div>
+			</div>
 
-						<div class="row"></div>
-						<table class="table table-hover">
-							<tr>
-								<th>序号</th>
-								<th>电影名称</th>
-								<th>剩余票数</th>
-								<th>操作</th>
-							</tr>
+		</div>
+		<!-- /.container-fluid -->
+	</div>
+	<!-- /#page-wrapper -->
 
-							<tr>
-								<td>num</td>
-
-								<td>!item.enterpriseRepresentative</td>
-								<td>!item.enterpriseCode</td>
-								<td>
-
-									<button class="btn btn-primary btn-sm">修改</button>
-
-								</td>
-							</tr>
-
-						</table>
+	<!-- /#wrapper -->
+	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+		aria-labelledby="mySmallModalLabel" id="delcfmModel">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="panel panel-danger">
+					<div class="panel-heading">提示</div>
+					<div class="panel-body">
+						<p id="delmessage"></p>
+						<button type="button" class="btn btn-danger" id="delete">确定</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 					</div>
 				</div>
-
+				<input id="url" type="hidden" />
 			</div>
-			<!-- /.container-fluid -->
 		</div>
-		<!-- /#page-wrapper -->
 	</div>
-	<!-- /#wrapper -->
-
 </body>
-<script type="text/javascript">
-	(function($) {
-		$(function() {
-			var basePath = $('base').attr('href');
-			$.setPage("enterprise/list?searchbody=" + $("#search").val() + "&");
-			$("button[tag='del']").on("click", function() {
-				var id = $(this).attr("url");
-				$('#url').val(basePath + "enterprise/delete?id=" + id); //ֵ
-				$('#delmessage').text("是否确定删除该项目");
-				$('#delcfmModel').modal();
-			});
-			$("button[tag='edit']").on(
-					"click",
-					function() {
-						var id = $(this).attr("url");
-						window.location.href = basePath
-								+ "enterprise/showedit?id=" + id;
-					});
-			$("button[tag='show']").on("click", function() {
-				var id = $(this).attr("url");
-				window.location.href = basePath + "enterprise/detail?id=" + id;
-			});
-			$("#delete").on("click", function() {
-				var url = $.trim($("#url").val()); //
-				window.location.href = url;
-			});
-		});
-	})(jQuery)
+<script>
+	$(document).ready(function () {
+	$.ajax({
+            url:"/list",
+            success:function (data) {
+                console.log(data);
+                var a = [];
+                for(var i in data){
+                    //var url = "/movie/"+data[i].id;
+                    //var start = Math.round(data[i].startTime);
+                    //var end = Math.round(data[i].endTime);
+                    //var now= Math.round(new Date().getTime());
+                    var movie = {
+                        //url:url,
+                        id:data[i].tid,
+                        name:data[i].moviename,
+                        num:data[i].ticketnum
+                        //startTime:new Date(start).Format("yyyy/MM/dd hh:mm:ss"),
+                        //endTime:new Date(end).Format("yyyy/MM/dd hh:mm:ss"),
+                        
+                        //status:status,
+                        //style:style,
+                        //text:text
+                    };
+                    a.push(movie);
+                    console.log(movie);
+                }
+                console.log(a);
+                var vm = new Vue({
+                    el:"#movieTable",
+                    data:{
+                        movies:a
+                    }
+                    computed:{
+                        sortmovies:function () {
+                            return _.orderBy(this.movies, 'id')
+                        }
+                    }
+                })
+            }
+        });
+	});
 </script>
+
+<!-- <script type="text/javascript">
+	$(function() {
+		
+		var basePath = $('base').attr('href');
+
+		//$.setPage("enterprise/list?searchbody=" + $("#search").val() + "&");
+		$("button[tag='del']").on("click", function() {
+			var id = $(this).attr("url");
+			//$('#url').val(basePath + "enterprise/delete?id=" + id); //ֵ
+			$('#delmessage').text("是否确定抢购");
+			$('#delcfmModel').modal();
+		});
+		$("button[tag='edit']").on("click", function() {
+			var id = $(this).attr("url");
+			window.location.href = basePath + "enterprise/showedit?id=" + id;
+		});
+		$("button[tag='show']").on("click", function() {
+			var id = $(this).attr("url");
+			window.location.href = basePath + "enterprise/detail?id=" + id;
+		});
+		$("#delete").on("click", function() {
+			var url = $.trim($("#url").val()); //
+			window.location.href = url;
+		});
+	});
+</script>  -->
 </html>
 
