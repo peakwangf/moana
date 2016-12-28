@@ -20,5 +20,9 @@ public class IndexService {
 		List<MovieTicket> movieTicket=basicDao.selectByQuery(MovieTicket.class,"");
 		return movieTicket;
 	}
+	public MovieTicket getMovieTicketById(int id){
+		MovieTicket movieTicket=basicDao.selectByPrimaryKey(MovieTicket.class,id);
+		return movieTicket;
+	}
 
 }

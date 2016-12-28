@@ -30,4 +30,12 @@ public class BasicDaoImpl implements BasicDao{
 		 list = (List<T>) q.execute();
 	     return list;
 	}
+	
+	@Override
+    public <T> T selectByPrimaryKey(Class<T> classtype,Object params) {
+        PersistenceManager pm = persistenceManagerFactory.getPersistenceManager();
+        T result = null;
+        result = pm.getObjectById(classtype, params);
+        return result;
+    }
 }

@@ -44,4 +44,10 @@ public class IndexController {
         model.addAttribute("list", movieTicket);
         return "index";
     }
+    @RequestMapping("select")
+    public String select(ModelMap model,int id) {
+    	MovieTicket movieTicket=indexService.getMovieTicketById(id);
+    	model.addAttribute("movieTicket", movieTicket);
+        return "private";
+    }
 }

@@ -1,6 +1,7 @@
 package com.peakwang.model;
 
 import javax.jdo.annotations.*;
+import java.util.Date;
 
 @PersistenceCapable(table = "movieticket")
 public class MovieTicket {
@@ -19,6 +20,8 @@ public class MovieTicket {
      * 剩余数量
      */
     private int ticketNum;
+    
+    public Date runTime;
     
     public MovieTicket(){
     	
@@ -46,5 +49,12 @@ public class MovieTicket {
     public void setTicketNum(int ticketNum) {
         this.ticketNum = ticketNum;
     }
+    
+    public Date getRunTime() {
+        return runTime;
+    }
 
+    public void setRunTime(Date runTime) {
+        this.runTime = runTime;
+    }
 }

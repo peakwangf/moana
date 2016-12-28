@@ -42,16 +42,19 @@
 						<tr>
 							<th>序号</th>
 							<th>电影名称</th>
+							<th>放映时间</th>
 							<th>剩余票数</th>
 							<th>操作</th>
+							
 						</tr>
 						 #set( $num = 1) #foreach($item in $list)			
 						 <tr>
 							<td>$item.Tid</td>
 							<td>$item.movieName</td>
+							<td>$item.runTime</td>
 							<td>$item.ticketNum</td>
 							<td>
-								<button class="btn btn-primary btn-sm" tag="del">抢票</button>
+								<button class="btn btn-primary btn-sm" tag="sel" url="$item.Tid" name="$item.movieName">抢票</button>
 							</td>
 						</tr>
 						#set( $num = $num+1) #end
@@ -72,7 +75,7 @@
 				<div class="panel panel-danger">
 					<div class="panel-heading">提示</div>
 					<div class="panel-body">
-						<p id="delmessage"></p>
+						<p id="selmessage"></p>
 						<button type="button" class="btn btn-danger" id="delete">确定</button>
 						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 					</div>
@@ -128,24 +131,15 @@
 
 <script type="text/javascript">
 	$(function() {
-		
-		var basePath = $('base').attr('href');
-
+		//var basePath = $('base').attr('href');
 		//$.setPage("enterprise/list?searchbody=" + $("#search").val() + "&");
-		$("button[tag='del']").on("click", function() {
+		$("button[tag='sel']").on("click", function() {
 			var id = $(this).attr("url");
-			//$('#url').val(basePath + "enterprise/delete?id=" + id); //ֵ
-			$('#delmessage').text("是否确定抢购");
+			var name = $(this).attr("name");
+			$('#url').val("select?id="+id); //ֵ
+			$('#selmessage').text("是否确定抢购<"+name+">");
 			$('#delcfmModel').modal();
 			
-		});
-		$("button[tag='edit']").on("click", function() {
-			var id = $(this).attr("url");
-			window.location.href = basePath + "enterprise/showedit?id=" + id;
-		});
-		$("button[tag='show']").on("click", function() {
-			var id = $(this).attr("url");
-			window.location.href = basePath + "enterprise/detail?id=" + id;
 		});
 		$("#delete").on("click", function() {
 			var url = $.trim($("#url").val()); //

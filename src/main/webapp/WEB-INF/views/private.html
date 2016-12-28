@@ -2,9 +2,143 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>个人主页</title>
+<!-- Bootstrap Core CSS -->
+<link href="css/qunit-1.11.0.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom CSS -->
+<link href="css/sb-admin.css" rel="stylesheet">
+
+<!-- Morris Charts CSS -->
+<link href="css/plugins/morris.css" rel="stylesheet">
+
+
+
+<!-- Bootstrap Core JavaScript -->
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
 </head>
+
 <body>
 
+	<!-- Navigation -->
+	<div id="page-wrapper">
+		<div class="container-fluid">
+
+			<div class="panel panel-default">
+
+				<div class="panel-body">
+					
+						<div class="row alert alert-success " aria-label="Close"
+							role="alert">
+							<h3 class="panel-title">电影列表</h3>
+						</div>
+						
+				
+					<div class="row"></div>
+					<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>电影名称</th>
+							<th>剩余票数</th>
+							
+						</tr>		
+						 <tr>
+							<td>$movieTicket.Tid</td>
+							<td>$movieTicket.movieName</td>
+							<td>$movieTicket.ticketNum</td>
+							
+						</tr>
+					</table>
+				</div>
+			</div>
+
+		</div>
+		<!-- /.container-fluid -->
+	</div>
+	<!-- /#page-wrapper -->
+
+	<!-- /#wrapper -->
+	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+		aria-labelledby="mySmallModalLabel" id="delcfmModel">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="panel panel-danger">
+					<div class="panel-heading">提示</div>
+					<div class="panel-body">
+						<p id="selmessage"></p>
+						<button type="button" class="btn btn-danger" id="delete">确定</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					</div>
+				</div>
+				<input id="url" type="hidden" />
+			</div>
+		</div>
+	</div>
 </body>
+<!--  <script>
+	$(document).ready(function () {
+	$.ajax({
+            url:"/list",
+            success:function (data) {
+                console.log(data);
+                var a = [];
+                for(var i in data){
+                    //var url = "/movie/"+data[i].id;
+                    //var start = Math.round(data[i].startTime);
+                    //var end = Math.round(data[i].endTime);
+                    //var now= Math.round(new Date().getTime());
+                    var movie = {
+                        //url:url,
+                        id:data[i].tid,
+                        name:data[i].moviename,
+                        num:data[i].ticketnum
+                        //startTime:new Date(start).Format("yyyy/MM/dd hh:mm:ss"),
+                        //endTime:new Date(end).Format("yyyy/MM/dd hh:mm:ss"),
+                        
+                        //status:status,
+                        //style:style,
+                        //text:text
+                    };
+                    a.push(movie);
+                    console.log(movie);
+                }
+                console.log(a);
+                var vm = new Vue({
+                    el:"#movieTable",
+                    data:{
+                        movies:a
+                    }
+                    computed:{
+                        sortmovies:function () {
+                            return _.orderBy(this.movies, 'id')
+                        }
+                    }
+                })
+            }
+        });
+	});
+</script>-->
+
+<script type="text/javascript">
+	$(function() {
+		//var basePath = $('base').attr('href');
+		//$.setPage("enterprise/list?searchbody=" + $("#search").val() + "&");
+		$("button[tag='sel']").on("click", function() {
+			var id = $(this).attr("url");
+			var name = $(this).attr("name");
+			$('#url').val("select"); //ֵ
+			$('#selmessage').text("是否确定抢购<"+name+">");
+			$('#delcfmModel').modal();
+			
+		});
+		$("#delete").on("click", function() {
+			var url = $.trim($("#url").val()); //
+			window.location.href = url;
+		});
+	});
+</script>
 </html>
+
