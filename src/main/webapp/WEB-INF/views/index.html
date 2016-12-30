@@ -17,11 +17,28 @@
 <!-- Bootstrap Core JavaScript -->
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
-
+<style>
+#header{
+width:200px;
+height:20px;
+margin-bottom:0px;
+}
+</style>
 </head>
 
 <body>
-
+<div id="header">
+	<ul class="nav navbar-left top-nav">
+		<li class="dropdown"><a href="#" class="dropdown-toggle"
+			data-toggle="dropdown"><i class="fa fa-user"></i>
+				$!user.userName<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li><a href="userindex?uid=$!{user.uid}"><i
+						class="fa fa-fw fa-cog"></i>查看个人资料</a></li>
+				<li><a href="exit"><i class="fa fa-fw fa-power-off"></i>注销</a></li>
+			</ul></li>
+	</ul>
+	</div>
 	<!-- Navigation -->
 	<div id="page-wrapper">
 		<div class="container-fluid">
@@ -29,7 +46,9 @@
 			<div class="panel panel-default">
 
 				<div class="panel-body">
-					
+					#if($!errorInfo)
+                        <div class="row alert alert-warning" aria-label="Close" role="alert">$!errorInfo</div>
+                        #end 
 						<div class="row alert alert-success " aria-label="Close"
 							role="alert">
 							<h3 class="panel-title">电影列表</h3>
@@ -76,7 +95,7 @@
 					<div class="panel-heading">提示</div>
 					<div class="panel-body">
 						<p id="selmessage"></p>
-						<button type="button" class="btn btn-danger" id="delete">确定</button>
+						<button type="button" class="btn btn-danger" id="grab">确定</button>
 						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 					</div>
 				</div>
@@ -131,17 +150,19 @@
 
 <script type="text/javascript">
 	$(function() {
+		
+			
 		//var basePath = $('base').attr('href');
 		//$.setPage("enterprise/list?searchbody=" + $("#search").val() + "&");
 		$("button[tag='sel']").on("click", function() {
 			var id = $(this).attr("url");
 			var name = $(this).attr("name");
-			$('#url').val("select?id="+id); //ֵ
+			$('#url').val("grab?id="+id); //ֵ
 			$('#selmessage').text("是否确定抢购<"+name+">");
 			$('#delcfmModel').modal();
 			
 		});
-		$("#delete").on("click", function() {
+		$("#grab").on("click", function() {
 			var url = $.trim($("#url").val()); //
 			window.location.href = url;
 		});

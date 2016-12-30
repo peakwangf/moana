@@ -21,7 +21,18 @@
 </head>
 
 <body>
-
+<div id="header">
+	<ul class="nav navbar-left top-nav">
+		<li class="dropdown"><a href="#" class="dropdown-toggle"
+			data-toggle="dropdown"><i class="fa fa-user"></i>
+				$!user.userName<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li><a href="userindex?id=$!{user.uid}"><i
+						class="fa fa-fw fa-cog"></i>查看个人资料</a></li>
+				<li><a href="exit"><i class="fa fa-fw fa-power-off"></i>注销</a></li>
+			</ul></li>
+	</ul>
+	</div>
 	<!-- Navigation -->
 	<div id="page-wrapper">
 		<div class="container-fluid">

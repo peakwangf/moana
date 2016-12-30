@@ -49,16 +49,22 @@ public class LoginController {
 		String params=null;
 		if (username != null && username.length() > 0) { 
 			params=username;
+		}else{
+			model.addAttribute("loginInfo", "用户名不能为空！");
+			return "login";
 		}
 		if (password != null && password.length() > 0) {
 			//password = MD5.EncoderByMd5(password);
+		}else{
+			model.addAttribute("loginInfo", "密码不能为空！");
+			return "login";
 		}
 		List<User> users = null;
 		users = loginService.loginByUsername(params);
 		if (users.size() > 0) {
-			if (password.equals(users.get(0).getPassword())) {
+			if (password.equals(users.get(0).getPassWord())) {
 				session.setAttribute("user", users.get(0));
-				return "test";
+				return "redirect:/list";
 			} else {
 				model.addAttribute("loginInfo", "对不起，您输入的密码错误。");
 			}
@@ -66,6 +72,17 @@ public class LoginController {
 			model.addAttribute("loginInfo", "对不起，您输入的账户不存在或者密码错误。");
 		}
 
+		return "login";
+	}
+	/**
+	 * 注销
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/exit")
+	public String exit(ModelMap model, HttpSession session) {
+		// 注销登陆者session
+		session.removeAttribute("user");
 		return "login";
 	}
 

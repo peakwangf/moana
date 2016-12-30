@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.peakwang.dao.BasicDao;
 import com.peakwang.model.User;
 
+
 @Service
 public class LoginService {
 	@Autowired
@@ -17,7 +18,8 @@ public class LoginService {
 	private BasicDao basicDao;
 	
 	
-	public List<User> loginByUsername(String params){
+	public List<User> loginByUsername(String username){
+		String params="userName=='"+username+"'";
 		List<User> users=basicDao.selectByQuery(User.class,params);
 		return users;
 	}

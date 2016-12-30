@@ -15,17 +15,20 @@ public class User {
      * 用户名
      */
 	@Column(length=20)
-	private String username;
+	private String userName;
 	/**
      * 密码
      */
 	@Column(length=20)
-	private String password;
+	private String passWord;
 	/**
      * 用户邮箱
      */
 	@Column(length=30)
 	private String email;
+	
+	private int leftGrabNum;
+	
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
@@ -37,20 +40,20 @@ public class User {
 	public void setUid(int id) {
 	    this.uid = id;
 	}
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPassWord() {
+        return passWord;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassWord(String passWord) {
+        this.passWord = passWord;
     }
 
     public String getEmail() {
@@ -59,5 +62,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    
+    public int getLeftGrabNum() {
+        return leftGrabNum;
+    }
+
+    public void setLeftGrabNum(int leftGrabNum) {
+        this.leftGrabNum = leftGrabNum;
     }
 }
