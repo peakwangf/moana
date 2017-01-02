@@ -1,10 +1,14 @@
 package com.peakwang.dao;
 
 import java.util.List;
+import java.util.Map;
+
 import javax.jdo.*;
 import java.lang.reflect.Field;
 
-
+import org.datanucleus.api.jdo.JDOQuery;
+import org.datanucleus.metadata.StoredProcQueryParameterMode;
+import org.datanucleus.store.rdbms.query.StoredProcedureQuery;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -33,6 +37,25 @@ public class BasicDaoImpl implements BasicDao{
         PersistenceManager pm = persistenceManagerFactory.getPersistenceManager();
         T result = null;
         result = pm.getObjectById(classtype, params);
+        pm.close();
         return result;
     }
+	
+	@Override
+	public Object selectByProc(String proc,Map<String, Object> params){
+		PersistenceManager pm = persistenceManagerFactory.getPersistenceManager();
+        Object result = null;
+        Query q = pm.newQuery("STOREDPROC", proc);
+        StoredProcedureQuery spq = (StoredProcedureQuery) ((JDOQuery) q).getInternalQuery();
+        for (String key : params.keySet()) {
+            if (key.contains("result"))
+                spq.registerParameter(key, params.get(key).getClass(), StoredProcQueryParameterMode.OUT);
+            else
+                spq.registerParameter(key, params.get(key).getClass(), StoredProcQueryParameterMode.IN);
+        }
+        spq.executeWithMap(params);
+        List results = (List)spq.getNextResults();
+        pm.close();
+        return results;
+	}
 }

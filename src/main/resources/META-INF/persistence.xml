@@ -7,6 +7,7 @@
     <persistence-unit name="Tutorial">
         <class>com.peakwang.model.User</class>
         <class>com.peakwang.model.MovieTicket</class>
+        <class>com.peakwang.model.Record</class>
         <exclude-unlisted-classes/>
         <properties>
 

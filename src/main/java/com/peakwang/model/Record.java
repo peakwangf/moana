@@ -10,13 +10,13 @@ public class Record {
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
 	private int rid;
 	
-	@Column(allowsNull = "false")
+	
 	private int uid;
 	
-	@Column(allowsNull = "false")
+	
 	private int tid;
 	
-	@Column(allowsNull = "false")
+	
 	private Date grabTime;
 	
 	public int getRid(){
