@@ -42,6 +42,28 @@ public class BasicDaoImpl implements BasicDao{
     }
 	
 	@Override
+	public <T> boolean update(T object, int id) {
+		boolean flag = false;
+		PersistenceManager pm = persistenceManagerFactory.getPersistenceManager();
+		Object temp = pm.getObjectById((Class<T>) object.getClass(), id);
+		if (temp == null)
+			return false;
+		BeanUtils.copyProperties(object, temp);
+		flag = true;
+		return flag;
+	}
+	
+	@Override
+	public <T> boolean insert(T object){
+		PersistenceManager pm = persistenceManagerFactory.getPersistenceManager();   
+		boolean flag = false;;    
+        pm.makePersistent(object);           
+        pm.close();
+        flag=true;
+        return flag;
+	}
+	
+	@Override
 	public Object selectByProc(String proc,Map<String, Object> params){
 		PersistenceManager pm = persistenceManagerFactory.getPersistenceManager();
         Object result = null;

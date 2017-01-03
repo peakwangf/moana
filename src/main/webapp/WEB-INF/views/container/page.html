@@ -2,11 +2,11 @@
 <div>
 	<div class="col-sm-5">
 		<ul class="col-sm-5" id="page" curpage=$page.start
-			pageCount=$page.pagesize totalpage=$page.totalpage>
+			pageCount=$page.pageSize totalpage=$page.totalPage>
 		</ul>
 	</div>
 	<div class="col-sm-5 pagination">
-	       页码 $!page.start/$!page.totalpage 记录数 $!page.total
+	       ҳ�� $!page.start/$!page.totalPage ��¼�� $!page.total
 	</div>
 </div>
 #end
@@ -23,18 +23,18 @@ jQuery.noConflict();
 					bootstrapMajorVersion:3,
 					containerClass:"pagination",
 		            currentPage:page.attr('curpage'),
-					totalPages:page.attr('totalpage'),
+					totalPages:page.attr('totalPage'),
 					numberOfPages:1,
 					itemTexts: function (type, page, current) {
 			              switch (type) {
 			                case "first":
-			                  return "首页";
+			                  return "��ҳ";
 			                case "prev":
-			                  return "上一页";
+			                  return "��һҳ";
 			                case "next":
-			                  return "下一页";
+			                  return "��һҳ";
 			                case "last":
-			                  return "末页";
+			                  return "ĩҳ";
 			                case "page":
 			                  return page;
 			              }},

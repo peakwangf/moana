@@ -21,7 +21,7 @@
 #header{
 width:200px;
 height:20px;
-margin-bottom:0px;
+margin-bottom:20px;
 }
 </style>
 </head>
@@ -68,7 +68,7 @@ margin-bottom:0px;
 						</tr>
 						 #set( $num = 1) #foreach($item in $list)			
 						 <tr>
-							<td>$item.Tid</td>
+							<td>$item.tid</td>
 							<td>$item.movieName</td>
 							<td>$item.runTime</td>
 							<td>$item.ticketNum</td>
@@ -80,7 +80,7 @@ margin-bottom:0px;
 					</table>
 				</div>
 			</div>
-
+			
 		</div>
 		<!-- /.container-fluid -->
 	</div>
@@ -157,7 +157,7 @@ margin-bottom:0px;
 		$("button[tag='sel']").on("click", function() {
 			var id = $(this).attr("url");
 			var name = $(this).attr("name");
-			$('#url').val("grab?id="+id); //ֵ
+			$('#url').val("grab?tid="+id); //ֵ
 			$('#selmessage').text("是否确定抢购<"+name+">");
 			$('#delcfmModel').modal();
 			

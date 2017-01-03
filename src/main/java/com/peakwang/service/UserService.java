@@ -2,7 +2,7 @@ package com.peakwang.service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,6 +12,7 @@ import com.peakwang.dao.BasicDao;
 import com.peakwang.model.RecordVo;
 import com.peakwang.model.MovieTicket;
 import com.peakwang.model.Record;
+import com.peakwang.model.User;
 
 @Service
 public class UserService {
@@ -19,7 +20,7 @@ public class UserService {
 	@Autowired
 	@Qualifier("basicDaoImpl")
 	private BasicDao basicDao;
-	private IndexService indexService;
+	
 	
 	/*public List<RecordVo> getRecordsByUid(int uid){
 		Map<String, Object> params = new HashMap<>();
@@ -36,12 +37,15 @@ public class UserService {
 		{
 			RecordVo recordVo=new RecordVo();
 			recordVo.setGrabTime(record.getGrabTime());
-			MovieTicket movieTicket=indexService.getMovieTicketById(record.getTid());
+			MovieTicket movieTicket=basicDao.selectByPrimaryKey(MovieTicket.class,record.getTid());
 			recordVo.setMovieName(movieTicket.getMovieName());
 			recordVo.setRunTime(movieTicket.getRunTime());
 			list.add(recordVo);
 		}
 		return list;
 	}
-
+	public User getUserById(int uid){
+		User user=basicDao.selectByPrimaryKey(User.class,uid);
+		return user;
+	}
 }

@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 import com.peakwang.service.IndexService;
 import com.peakwang.model.MovieTicket;
 import com.peakwang.model.User;
+ 
 
 /**
  * 控制器Controller
@@ -28,6 +29,8 @@ import com.peakwang.model.User;
 public class IndexController {
 	@Autowired
 	private IndexService indexService;
+
+
 	
 	public static final String BASE_PATH = ContextLoader
 			.getCurrentWebApplicationContext().getServletContext()
@@ -49,21 +52,11 @@ public class IndexController {
         return "index";
     }
     @RequestMapping("grab")
-    public String grab(RedirectAttributesModelMap model,HttpServletRequest request, int id) {
+    public String grab(RedirectAttributesModelMap model,HttpServletRequest request, int tid) {
     	HttpSession session=request.getSession();
     	User user=(User)session.getAttribute("user");
-    	if(user.getLeftGrabNum()==0){
-    		model.addFlashAttribute("errorInfo", "您已没有抢购额度!!!");
-    		return "redirect:/list";
-    	}
-    	MovieTicket movieTicket=indexService.getMovieTicketById(id);
-    	if(movieTicket.getTicketNum()==0){
-    		model.addFlashAttribute("errorInfo", "该电影票已售罄!!!");
-    		return "redirect:/list";
-    	}
-    	return "redirect:/list";
-    	//MovieTicket movieTicket=indexService.getMovieTicketById(id);
-    	//model.addAttribute("movieTicket", movieTicket);
-       
+    	String message=indexService.grab(user.getUid(), tid);
+    	model.addFlashAttribute("errorInfo", message);
+    	return "redirect:/list";     
     }
 }
