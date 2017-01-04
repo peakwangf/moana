@@ -9,5 +9,5 @@ public interface BasicDao {
 	<T> T selectByPrimaryKey(Class<T> classtype,Object params);
 	Object selectByProc(String proc,Map<String, Object> params);
 	<T> boolean update(T object,int id);
-	<T> boolean insert(T object);
+	<T> void insert(T object);
 }

@@ -1,12 +1,10 @@
 package com.peakwang.model;
 
-import java.util.Date;
-
 public class RecordVo {
 
 	private String movieName;
-	private Date runTime;
-	private Date grabTime;
+	private String runTime;
+	private String grabTime;
 
 	public String getMovieName() {
 		return movieName;
@@ -16,19 +14,19 @@ public class RecordVo {
 		this.movieName = movieName;
 	}
 
-	public Date getRunTime() {
+	public String getRunTime() {
 		return runTime;
 	}
 
-	public void setRunTime(Date runTime) {
+	public void setRunTime(String runTime) {
 		this.runTime = runTime;
 	}
 
-	public Date getGrabTime() {
+	public String getGrabTime() {
 		return grabTime;
 	}
 
-	public void setGrabTime(Date grabTime) {
+	public void setGrabTime(String grabTime) {
 		this.grabTime = grabTime;
 	}
 

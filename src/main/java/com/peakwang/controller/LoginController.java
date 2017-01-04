@@ -12,9 +12,8 @@ import org.springframework.web.context.ContextLoader;
 
 import com.peakwang.model.User;
 import com.peakwang.service.LoginService;
+import com.peakwang.service.UserService;
 import com.peakwang.util.MD5;
-
-
 
 /**
  * 控制器Controller
@@ -27,6 +26,9 @@ public class LoginController {
 	
 	@Autowired
 	private LoginService loginService;
+	@Autowired
+	private UserService userService;
+	
 	
 	public static final String BASE_PATH = ContextLoader.getCurrentWebApplicationContext().getServletContext()
 			.getRealPath("/");
@@ -35,7 +37,7 @@ public class LoginController {
 	public String login(ModelMap model, HttpSession session) {
 		User user = (User) session.getAttribute("user");
 		if (user != null)
-			return "redirect:/index";
+			return "redirect:/list";
 		else
 			return "login";
 	}
@@ -48,7 +50,7 @@ public class LoginController {
 			return "test2";
 	}
 	@RequestMapping(value = "/doLogin", method = RequestMethod.POST)
-	public String doLogin(ModelMap model, HttpSession session, String username, String password) {
+	public String doLogin(ModelMap model, HttpSession session, String username, String password)  {
 		String params=null;
 		if (username != null && username.length() > 0) { 
 			params=username;
@@ -57,7 +59,7 @@ public class LoginController {
 			return "login";
 		}
 		if (password != null && password.length() > 0) {
-			//password = MD5.EncoderByMd5(password);
+			password = MD5.EncoderByMd5(password);
 		}else{
 			model.addAttribute("loginInfo", "密码不能为空！");
 			return "login";
@@ -67,6 +69,7 @@ public class LoginController {
 		if (users.size() > 0) {
 			if (password.equals(users.get(0).getPassWord())) {
 				session.setAttribute("user", users.get(0));
+				
 				return "redirect:/list";
 			} else {
 				model.addAttribute("loginInfo", "对不起，您输入的密码错误。");
@@ -78,33 +81,20 @@ public class LoginController {
 		return "login";
 	}
 	@RequestMapping(value = "/doRegister", method = RequestMethod.POST)
-	public String doRegister(ModelMap model, HttpSession session, String username, String password) {
-		String params=null;
-		if (username != null && username.length() > 0) { 
-			params=username;
-		}else{
-			model.addAttribute("loginInfo", "用户名不能为空！");
-			return "login";
-		}
-		if (password != null && password.length() > 0) {
-			//password = MD5.EncoderByMd5(password);
-		}else{
-			model.addAttribute("loginInfo", "密码不能为空！");
-			return "login";
-		}
+	public String doRegister(ModelMap model,String username, String email,String password){
 		List<User> users = null;
-		users = loginService.loginByUsername(params);
+		users = loginService.loginByUsername(username);
 		if (users.size() > 0) {
-			if (password.equals(users.get(0).getPassWord())) {
-				session.setAttribute("user", users.get(0));
-				return "redirect:/list";
-			} else {
-				model.addAttribute("loginInfo", "对不起，您输入的密码错误。");
-			}
-		} else {
-			model.addAttribute("loginInfo", "对不起，您输入的账户不存在或者密码错误。");
+			model.addAttribute("registerInfo", "该用户名已存在！");
+			return "register";
 		}
-
+		User user=new User();
+		user.setUserName(username);
+		user.setEmail(email);
+		user.setPassWord(MD5.EncoderByMd5(password));
+		user.setLeftGrabNum(2);
+		userService.add(user);
+		model.addAttribute("loginInfo", "注册成功，请登录！");
 		return "login";
 	}
 	/**
@@ -118,5 +108,5 @@ public class LoginController {
 		session.removeAttribute("user");
 		return "login";
 	}
-
+	
 }

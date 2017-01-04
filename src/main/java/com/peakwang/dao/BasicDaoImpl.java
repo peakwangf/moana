@@ -54,13 +54,10 @@ public class BasicDaoImpl implements BasicDao{
 	}
 	
 	@Override
-	public <T> boolean insert(T object){
-		PersistenceManager pm = persistenceManagerFactory.getPersistenceManager();   
-		boolean flag = false;;    
+	public <T> void insert(T object){
+		PersistenceManager pm = persistenceManagerFactory.getPersistenceManager();   		    
         pm.makePersistent(object);           
         pm.close();
-        flag=true;
-        return flag;
 	}
 	
 	@Override

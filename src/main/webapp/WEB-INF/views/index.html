@@ -18,11 +18,7 @@
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <style>
-#header{
-width:200px;
-height:20px;
-margin-bottom:20px;
-}
+
 </style>
 </head>
 
@@ -56,7 +52,7 @@ margin-bottom:20px;
 						
 				
 					<div class="row"></div>
-					<table class="table table-hover">
+					<table class="table table-hover" align="center">
 					<thead>
 						<tr>
 							<th>序号</th>
@@ -66,17 +62,19 @@ margin-bottom:20px;
 							<th>操作</th>
 							
 						</tr>
-						 #set( $num = 1) #foreach($item in $list)			
+						 #set( $num = 0)
+						 #foreach($item in $list)			
 						 <tr>
 							<td>$item.tid</td>
 							<td>$item.movieName</td>
-							<td>$item.runTime</td>
+							<td>$dates[$num]</td>
 							<td>$item.ticketNum</td>
 							<td>
 								<button class="btn btn-primary btn-sm" tag="sel" url="$item.Tid" name="$item.movieName">抢票</button>
 							</td>
 						</tr>
-						#set( $num = $num+1) #end
+						#set( $num = $num+1) 
+						#end
 					</table>
 				</div>
 			</div>
@@ -168,5 +166,18 @@ margin-bottom:20px;
 		});
 	});
 </script>
+<!-- script >
+jQuery.noConflict();
+(function($) {
+	$(function() {
+		setInterval(
+				function(){
+					$
+					window.location.href = "list";
+				}
+				,3000);
+        
+    })
+})(jQuery)
+</script-->
 </html>
-

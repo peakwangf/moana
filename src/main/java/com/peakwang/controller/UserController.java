@@ -30,6 +30,8 @@ public class UserController {
 		HttpSession session=request.getSession();
     	User user=(User)session.getAttribute("user");
 		List<RecordVo> list = userService.getRecordsByUid(user.getUid());
+		int leftNum=userService.getUserById(user.getUid()).getLeftGrabNum();
+		model.addAttribute("leftNum", leftNum);
 		if(list.size()>0){
 			model.addAttribute("list", list);
 		}else{

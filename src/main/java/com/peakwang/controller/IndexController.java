@@ -1,6 +1,8 @@
 package com.peakwang.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import com.peakwang.service.IndexService;
 import com.peakwang.model.MovieTicket;
+import com.peakwang.model.RecordVo;
 import com.peakwang.model.User;
  
 
@@ -39,7 +42,10 @@ public class IndexController {
 	 /**
      * 首页
      */
-  
+	 @RequestMapping("index")
+	    public String index() {
+	        return "login";
+	    }
 	
 	/**
      * 获取电影票列表
@@ -47,10 +53,17 @@ public class IndexController {
      */
     @RequestMapping("list")
     public String list(ModelMap model) {
-        List<MovieTicket> movieTicket = indexService.getAllMovieTicket();
-        model.addAttribute("list", movieTicket);
+        List<MovieTicket> movieTickets = indexService.getAllMovieTicket();
+        List<String> dates=new ArrayList<String>();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        for(MovieTicket movieTicket:movieTickets){
+        	dates.add(sdf.format(movieTicket.getRunTime()));
+        }
+        model.addAttribute("list", movieTickets);
+        model.addAttribute("dates", dates);
         return "index";
     }
+   
     @RequestMapping("grab")
     public String grab(RedirectAttributesModelMap model,HttpServletRequest request, int tid) {
     	HttpSession session=request.getSession();

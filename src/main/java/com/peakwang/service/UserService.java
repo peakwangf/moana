@@ -2,11 +2,11 @@ package com.peakwang.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import java.text.SimpleDateFormat;
 
 import com.peakwang.dao.BasicDao;
 import com.peakwang.model.RecordVo;
@@ -35,11 +35,12 @@ public class UserService {
 		List<Record> records=basicDao.selectByQuery(Record.class,params);
 		for(Record record:records)
 		{
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			RecordVo recordVo=new RecordVo();
-			recordVo.setGrabTime(record.getGrabTime());
+			recordVo.setGrabTime(sdf.format(record.getGrabTime()));
 			MovieTicket movieTicket=basicDao.selectByPrimaryKey(MovieTicket.class,record.getTid());
 			recordVo.setMovieName(movieTicket.getMovieName());
-			recordVo.setRunTime(movieTicket.getRunTime());
+			recordVo.setRunTime(sdf.format(movieTicket.getRunTime()));
 			list.add(recordVo);
 		}
 		return list;
@@ -47,5 +48,8 @@ public class UserService {
 	public User getUserById(int uid){
 		User user=basicDao.selectByPrimaryKey(User.class,uid);
 		return user;
+	}
+	public void add(User user){
+		basicDao.insert(user);
 	}
 }

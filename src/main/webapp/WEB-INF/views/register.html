@@ -2,7 +2,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <title>注册界面</title>
@@ -13,6 +14,17 @@
 <link href="css/sb-admin.css" rel="stylesheet">
 <!-- Morris Charts CSS -->
 <link href="css/plugins/morris.css" rel="stylesheet">
+<link href="css/plugins/bootstrapValidator.min.css " rel="stylesheet ">
+<!-- Js库 -->
+<script src="js/jquery.js "></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js "></script>
+
+<script src="js/plugins/bootstrapValidator/bootstrapValidator.min.js "></script>
+<!--[if lt IE 9]>
+  <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+  <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
 </head>
 <body>
 <div class="container">
@@ -31,14 +43,32 @@
 					<div style="display: none" id="login-alert "
 						class="alert alert-danger col-sm-12 "></div>
 
-					<form id="registerform" class="form-horizontal" role="form"
-						action="register" method="post">
-						<div class="form-group ">
+					<form id="registerform" class="form-horizontal" role="form" name="registerform"
+						action="doRegister" method="post"
+						data-bv-message="This value is not valid"
+    					data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
+    					data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
+    					data-bv-feedbackicons-validating="glyphicon glyphicon-refresh">
+						<div class="form-group">
 							<div style="margin-bottom: 25px" class="input-group">
 								<span class="input-group-addon"><i class="fa fa-user "></i></span>
-								<input id="register-username" type="text" class="form-control "
-									name="username" placeholder="请输入您的账户 " data-bv-notempty
-									data-bv-notempty-message="您的账户不能为空 ">
+								<input id="register-username" type="text" class="form-control"
+									name="username" placeholder="请输入您的账户 " 
+									data-bv-notempty="true"
+                					data-bv-notempty-message="用户名不能为空"
+
+                					data-bv-regexp="true"
+                					data-bv-regexp-regexp="[a-zA-Z0-9_\.]+"
+                					data-bv-regexp-message="用户名只能包含大写、小写、数字和下划线"
+
+                					data-bv-stringlength="true"
+                					data-bv-stringlength-min="3"
+                					data-bv-stringlength-max="30"
+                					data-bv-stringlength-message="用户名长度必须在6到30位之间"
+
+                					data-bv-different="true"
+               						data-bv-different-field="password"
+                					data-bv-different-message="用户名不能与密码相同" />
 							</div>
 						</div>
 						<div class="form-group ">
@@ -46,30 +76,52 @@
 								<span class="input-group-addon"><i class="fa fa-lock "></i></span>
 								<input id="register-email" type="text"
 									class="form-control " name="email" placeholder="请输入您的邮箱"
-									data-bv-notempty data-bv-notempty-message="您的邮箱不能为空 ">
+									data-bv-notempty="true"
+                					data-bv-notempty-message="邮箱不能为空"
+									data-bv-emailaddress="true"
+                					data-bv-emailaddress-message="邮箱格式不正确" />
 							</div>
 						</div>
 						<div class="form-group ">
 							<div style="margin-bottom: 25px" class="input-group ">
 								<span class="input-group-addon"><i class="fa fa-lock "></i></span>
 								<input id="register-password1" type="password"
-									class="form-control " name="password1" placeholder="请输入您的密码 "
-									data-bv-notempty data-bv-notempty-message="您的密码不能为空 ">
+									class="form-control " name="password" placeholder="请输入您的密码 "
+									data-bv-notempty="true"
+                					data-bv-notempty-message="密码不能为空"
+
+                					data-bv-identical="true"
+                					data-bv-identical-field="confirmpassword"
+                					data-bv-identical-message="两次密码不一致"
+
+                					data-bv-different="true"
+                					data-bv-different-field="username"
+                					data-bv-different-message="密码不能与用户名相同" />
 							</div>
 						</div>
 						<div class="form-group ">
 							<div style="margin-bottom: 25px" class="input-group ">
 								<span class="input-group-addon"><i class="fa fa-lock "></i></span>
-								<input id="register-password2" type="password"
-									class="form-control " name="password2" placeholder="请再次输入您的密码 "
-									data-bv-notempty data-bv-notempty-message="您的密码不能为空 ">
+								<input id="confirmpassword" type="password"
+									class="form-control " name="confirmpassword" placeholder="请再次输入您的密码 "
+									data-bv-notempty="true"
+                					data-bv-notempty-message="密码不能为空"
+
+                					data-bv-identical="true"
+                					data-bv-identical-field="password"
+                					data-bv-identical-message="两次密码不一致"
+
+                					data-bv-different="true"
+                					data-bv-different-field="username"
+                					data-bv-different-message="密码不能与用户名相同" />
 							</div>
 						</div>
 						<div style="margin-top: 10px" class="form-group ">
 							<!-- Button -->
 							<div class="col-sm-12 controls ">
-								<button type="submit" class="btn btn-success col-sm-4 ">确认</button>
+								<button type="submit" class="btn btn-success col-sm-4 ">提交</button>
 								<button type="reset" class="btn btn-success col-sm-4 ">重置</button>
+								<button type="button" id="back" onclick="window.location.href('login')" class="btn btn-success col-sm-4 ">返回</button>
 							</div>
 						</div>
 						<!-- <p class="info form-group alert alert-danger "></p> -->
@@ -82,28 +134,13 @@
 		</div>
 	</div>
 </body>
-<!-- Js库 -->
-<script src="js/jquery.js "></script>
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js "></script>
-<link href="css/plugins/bootstrapValidator.min.css " rel="stylesheet ">
-<script src="js/plugins/bootstrapValidator/bootstrapValidator.min.js "></script>
+
 <script type="text/javascript ">
-	jQuery.noConflict();
-	(function($) {
-		$(function() {
-			$("#submit-btn ").on(
-					"click ",
-					function() {
-						$("#registerform ").bootstrapValidator();
-						var isValid = $('#registerform')
-								.data('bootstrapValidator').isValid();
-						//console.log(isValid);
-						if (isValid) {
-							$("#registerform ").submit();
-						}
-					});
-		})
-	})(jQuery)
+$(document).ready(function() {
+    $('#registerform').bootstrapValidator();
+	$("#back").click(function () {
+            window.location.href = "login";
+        });
+});
 </script>
 </html>

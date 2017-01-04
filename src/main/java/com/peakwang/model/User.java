@@ -1,4 +1,4 @@
-package com.peakwang.model;
+	package com.peakwang.model;
 
 import javax.jdo.annotations.*;
 
@@ -14,24 +14,20 @@ public class User {
 	/**
      * 用户名
      */
-	@Column(length=20)
 	private String userName;
 	/**
      * 密码
      */
-	@Column(length=20)
+	
 	private String passWord;
 	/**
      * 用户邮箱
      */
-	@Column(length=30)
+	
 	private String email;
 	
 	private int leftGrabNum;
 	
-	public User() {
-		// TODO Auto-generated constructor stub
-	}
 	
 	public int getUid() {
 	    return uid;
