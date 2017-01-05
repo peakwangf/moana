@@ -25,7 +25,9 @@ public class User {
      */
 	
 	private String email;
-	
+	/**
+     * 剩余可抢购数量
+     */
 	private int leftGrabNum;
 	
 	

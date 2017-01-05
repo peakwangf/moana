@@ -22,17 +22,23 @@ public class IndexService {
 	private UserService userService;
 
 	
-	
+	/**
+     * 获取电影票列表
+     */
 	public List<MovieTicket> getAllMovieTicket(){
 		List<MovieTicket> movieTicket=basicDao.selectByQuery(MovieTicket.class,"");
 		return movieTicket;
 	}
-	
+	/**
+     * 通过电影票ID查找电影票
+     */
 	public MovieTicket getMovieTicketById(int id){
 		MovieTicket movieTicket=basicDao.selectByPrimaryKey(MovieTicket.class,id);
 		return movieTicket;
 	}
-	
+	/**
+     * 抢购
+     */
 	public String grab(int uid,int tid){
 		String message=null;
 		User user=userService.getUserById(uid);

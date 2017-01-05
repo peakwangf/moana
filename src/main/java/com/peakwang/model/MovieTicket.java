@@ -20,7 +20,9 @@ public class MovieTicket {
      * 剩余数量
      */
     private int ticketNum;
-    
+    /**
+     * 放映时间
+     */
     public Date runTime;
     
     public MovieTicket(){

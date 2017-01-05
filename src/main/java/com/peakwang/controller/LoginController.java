@@ -49,6 +49,11 @@ public class LoginController {
 	public String test(ModelMap model, HttpSession session) {
 			return "test2";
 	}
+	/**
+	 * 登陆验证
+	 * 
+	 * @return
+	 */
 	@RequestMapping(value = "/doLogin", method = RequestMethod.POST)
 	public String doLogin(ModelMap model, HttpSession session, String username, String password)  {
 		String params=null;
@@ -80,6 +85,11 @@ public class LoginController {
 
 		return "login";
 	}
+	/**
+	 * 注册新用户
+	 * 
+	 * @return
+	 */
 	@RequestMapping(value = "/doRegister", method = RequestMethod.POST)
 	public String doRegister(ModelMap model,String username, String email,String password){
 		List<User> users = null;

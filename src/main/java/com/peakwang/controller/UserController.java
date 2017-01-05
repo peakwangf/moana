@@ -24,7 +24,11 @@ public class UserController {
 	public static final String BASE_PATH = ContextLoader
 			.getCurrentWebApplicationContext().getServletContext()
 			.getRealPath("/");
-	
+	/**
+	 * 已抢购列表
+	 * 
+	 * @return
+	 */
 	@RequestMapping("userindex")
 	public String userindex(ModelMap model,HttpServletRequest request){
 		HttpSession session=request.getSession();

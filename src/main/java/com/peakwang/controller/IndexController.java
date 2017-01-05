@@ -7,18 +7,15 @@ import java.text.SimpleDateFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import com.peakwang.service.IndexService;
 import com.peakwang.model.MovieTicket;
-import com.peakwang.model.RecordVo;
 import com.peakwang.model.User;
  
 
@@ -63,7 +60,10 @@ public class IndexController {
         model.addAttribute("dates", dates);
         return "index";
     }
-   
+    /**
+     * 抢购功能
+     * @return 电影票列表
+     */
     @RequestMapping("grab")
     public String grab(RedirectAttributesModelMap model,HttpServletRequest request, int tid) {
     	HttpSession session=request.getSession();
@@ -72,4 +72,5 @@ public class IndexController {
     	model.addFlashAttribute("errorInfo", message);
     	return "redirect:/list";     
     }
+    
 }

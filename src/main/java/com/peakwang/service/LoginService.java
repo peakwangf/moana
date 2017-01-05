@@ -17,7 +17,9 @@ public class LoginService {
 	@Qualifier("basicDaoImpl")
 	private BasicDao basicDao;
 	
-	
+	/**
+     * 通过用户名登陆
+     */
 	public List<User> loginByUsername(String username){
 		String params="userName=='"+username+"'";
 		List<User> users=basicDao.selectByQuery(User.class,params);

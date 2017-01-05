@@ -12,16 +12,11 @@
 <!-- Morris Charts CSS -->
 <link href="css/plugins/morris.css" rel="stylesheet">
 
-
-
 <!-- Bootstrap Core JavaScript -->
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<style>
 
-</style>
 </head>
-
 <body>
 <div id="header">
 	<ul class="nav navbar-left top-nav">
@@ -35,6 +30,7 @@
 			</ul></li>
 	</ul>
 	</div>
+	 <div id="result"></div>
 	<!-- Navigation -->
 	<div id="page-wrapper">
 		<div class="container-fluid">
@@ -48,9 +44,7 @@
 						<div class="row alert alert-success " aria-label="Close"
 							role="alert">
 							<h3 class="panel-title">电影列表</h3>
-						</div>
-						
-				
+						</div>	
 					<div class="row"></div>
 					<table class="table table-hover" align="center">
 					<thead>
@@ -59,8 +53,7 @@
 							<th>电影名称</th>
 							<th>放映时间</th>
 							<th>剩余票数</th>
-							<th>操作</th>
-							
+							<th>操作</th>			
 						</tr>
 						 #set( $num = 0)
 						 #foreach($item in $list)			
@@ -102,63 +95,15 @@
 		</div>
 	</div>
 </body>
-<!--  <script>
-	$(document).ready(function () {
-	$.ajax({
-            url:"/list",
-            success:function (data) {
-                console.log(data);
-                var a = [];
-                for(var i in data){
-                    //var url = "/movie/"+data[i].id;
-                    //var start = Math.round(data[i].startTime);
-                    //var end = Math.round(data[i].endTime);
-                    //var now= Math.round(new Date().getTime());
-                    var movie = {
-                        //url:url,
-                        id:data[i].tid,
-                        name:data[i].moviename,
-                        num:data[i].ticketnum
-                        //startTime:new Date(start).Format("yyyy/MM/dd hh:mm:ss"),
-                        //endTime:new Date(end).Format("yyyy/MM/dd hh:mm:ss"),
-                        
-                        //status:status,
-                        //style:style,
-                        //text:text
-                    };
-                    a.push(movie);
-                    console.log(movie);
-                }
-                console.log(a);
-                var vm = new Vue({
-                    el:"#movieTable",
-                    data:{
-                        movies:a
-                    }
-                    computed:{
-                        sortmovies:function () {
-                            return _.orderBy(this.movies, 'id')
-                        }
-                    }
-                })
-            }
-        });
-	});
-</script>-->
 
 <script type="text/javascript">
-	$(function() {
-		
-			
-		//var basePath = $('base').attr('href');
-		//$.setPage("enterprise/list?searchbody=" + $("#search").val() + "&");
+	$(document).ready(function (){
 		$("button[tag='sel']").on("click", function() {
 			var id = $(this).attr("url");
 			var name = $(this).attr("name");
 			$('#url').val("grab?tid="+id); //ֵ
 			$('#selmessage').text("是否确定抢购<"+name+">");
 			$('#delcfmModel').modal();
-			
 		});
 		$("#grab").on("click", function() {
 			var url = $.trim($("#url").val()); //
@@ -166,18 +111,5 @@
 		});
 	});
 </script>
-<!-- script >
-jQuery.noConflict();
-(function($) {
-	$(function() {
-		setInterval(
-				function(){
-					$
-					window.location.href = "list";
-				}
-				,3000);
-        
-    })
-})(jQuery)
-</script-->
+
 </html>

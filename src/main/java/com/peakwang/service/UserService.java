@@ -21,14 +21,9 @@ public class UserService {
 	@Qualifier("basicDaoImpl")
 	private BasicDao basicDao;
 	
-	
-	/*public List<RecordVo> getRecordsByUid(int uid){
-		Map<String, Object> params = new HashMap<>();
-		params.put("id", uid);
-		String proc="GetRecordsByUid_Proc";
-		List<RecordVo> records=(List<RecordVo>)basicDao.selectByProc(proc,params);
-		return records;
-	}*/
+	/**
+     * 返回已购列表
+     */
 	public List<RecordVo> getRecordsByUid(int uid){
 		List<RecordVo> list = new ArrayList<RecordVo>();
 		String params="uid=="+uid;
@@ -45,10 +40,16 @@ public class UserService {
 		}
 		return list;
 	}
+	/**
+     * 通过用户ID查找用户
+     */
 	public User getUserById(int uid){
 		User user=basicDao.selectByPrimaryKey(User.class,uid);
 		return user;
 	}
+	/**
+     * 添加用户
+     */
 	public void add(User user){
 		basicDao.insert(user);
 	}

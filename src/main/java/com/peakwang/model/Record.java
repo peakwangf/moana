@@ -5,18 +5,26 @@ import java.util.Date;
 
 @PersistenceCapable(table="record")
 public class Record {
-
+	/**
+     * 记录ID
+     */
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
 	private int rid;
 	
-	
+	/**
+     * 用户ID
+     */
 	private int uid;
 	
-	
+	/**
+     * 电泳票ID
+     */
 	private int tid;
 	
-	
+	/**
+     * 抢购时间
+     */
 	private Date grabTime;
 	
 	public int getRid(){

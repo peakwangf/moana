@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.jdo.*;
-import java.lang.reflect.Field;
 
 import org.datanucleus.api.jdo.JDOQuery;
 import org.datanucleus.metadata.StoredProcQueryParameterMode;
@@ -21,7 +20,9 @@ public class BasicDaoImpl implements BasicDao{
    
 	@Autowired
     private PersistenceManagerFactory persistenceManagerFactory;
-	
+	/**
+     * 通过字段查找
+     */
 	@Override
 	public <T> List<T> selectByQuery(Class<T> classtype,String params){
 		 PersistenceManager pm = persistenceManagerFactory.getPersistenceManager();
@@ -31,7 +32,9 @@ public class BasicDaoImpl implements BasicDao{
 		 pm.close();
 	     return list;
 	}
-	
+	/**
+     * 通过主键查找
+     */
 	@Override
     public <T> T selectByPrimaryKey(Class<T> classtype,Object params) {
         PersistenceManager pm = persistenceManagerFactory.getPersistenceManager();
@@ -40,7 +43,9 @@ public class BasicDaoImpl implements BasicDao{
         pm.close();
         return result;
     }
-	
+	/**
+     * 更新
+     */
 	@Override
 	public <T> boolean update(T object, int id) {
 		boolean flag = false;
@@ -52,14 +57,18 @@ public class BasicDaoImpl implements BasicDao{
 		flag = true;
 		return flag;
 	}
-	
+	/**
+     * 插入
+     */
 	@Override
 	public <T> void insert(T object){
 		PersistenceManager pm = persistenceManagerFactory.getPersistenceManager();   		    
         pm.makePersistent(object);           
         pm.close();
 	}
-	
+	/**
+     * 存储过程，正在研究中
+     */
 	@Override
 	public Object selectByProc(String proc,Map<String, Object> params){
 		PersistenceManager pm = persistenceManagerFactory.getPersistenceManager();
