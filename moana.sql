@@ -1,3 +1,4 @@
+
 /*
 Navicat MariaDB Data Transfer
 
@@ -25,7 +26,7 @@ CREATE TABLE `movieticket` (
   `RUNTIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `TICKETNUM` int(11) NOT NULL,
   PRIMARY KEY (`TID`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of movieticket
@@ -41,3 +42,28 @@ INSERT INTO `movieticket` VALUES ('8', '你好，疯子', '2017-01-10 20:25:44',
 INSERT INTO `movieticket` VALUES ('9', '单身日记：好孕来袭', '2017-01-10 11:26:15', '300');
 INSERT INTO `movieticket` VALUES ('10', '一路逆风', '2017-01-11 17:44:35', '300');
 INSERT INTO `movieticket` VALUES ('11', '你的名字。', '2017-01-12 19:44:11', '299');
+
+-- ----------------------------
+-- Table structure for user
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `UID` int(11) NOT NULL AUTO_INCREMENT,
+  `EMAIL` varchar(30) CHARACTER SET utf8 NOT NULL,
+  `PASSWORD` varchar(20) CHARACTER SET utf8 NOT NULL,
+  `USERNAME` varchar(20) CHARACTER SET utf8 NOT NULL,
+  `LEFTGRABNUM` int(11) NOT NULL,
+  PRIMARY KEY (`UID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for record
+-- ----------------------------
+DROP TABLE IF EXISTS `record`;
+CREATE TABLE `record` (
+  `rid` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) NOT NULL,
+  `tid` int(11) NOT NULL,
+  `grabTime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`rid`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
